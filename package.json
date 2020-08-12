@@ -1,0 +1,21 @@
+{
+  "name": "crypto_api_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "node-pg-migrate",
+    "migrate-rerun": "DATABASE_URL=postgres://colin:Lq3zuR9@localhost:5432/cryptopairsdb npm run migrate redo 1000"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "node-pg-migrate": "^5.4.0",
+    "node-schedule": "^1.3.2",
+    "pg": "^8.3.0"
+  }
+}
