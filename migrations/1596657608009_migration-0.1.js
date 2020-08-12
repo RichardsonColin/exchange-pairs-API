@@ -17,12 +17,12 @@ exports.up = (pgm) => {
     grade: { type: 'varchar(10)' },
     "volume_24_hour": { type: 'decimal' },
     "created_at": {
-      type: 'timestamp',
+      type: 'TIMESTAMPTZ',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
     "updated_at": {
-      type: 'timestamp',
+      type: 'TIMESTAMPTZ',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
@@ -32,12 +32,12 @@ exports.up = (pgm) => {
     symbol: { type: 'varchar(100)', notNull: true },
     name: { type: 'varchar(100)' },
     "created_at": {
-      type: 'timestamp',
+      type: 'TIMESTAMPTZ',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
     "updated_at": {
-      type: 'timestamp',
+      type: 'TIMESTAMPTZ',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
@@ -46,12 +46,12 @@ exports.up = (pgm) => {
     id: 'id',
     symbol: { type: 'varchar(100)', notNull: true },
     "created_at": {
-      type: 'timestamp',
+      type: 'TIMESTAMPTZ',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
     "updated_at": {
-      type: 'timestamp',
+      type: 'TIMESTAMPTZ',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
@@ -74,7 +74,7 @@ exports.up = (pgm) => {
       references: '"base_pairs"',
     },
     "created_at": {
-      type: 'timestamp',
+      type: 'TIMESTAMPTZ',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
