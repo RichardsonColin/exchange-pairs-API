@@ -1,12 +1,18 @@
 const { Pool } = require('pg')
 
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
+const ENV = process.env.NODE_ENV && process.env.NODE_ENV !== 'development' ?
+  '' :
+  '_TEST'
+
+const db_config = {
+  user: process.env.DB_USER + ENV,
+  host: process.env.DB_HOST + ENV,
+  database: process.env.DB_DATABASE + ENV,
+  password: process.env.DB_PASSWORD + ENV,
   port: process.env.DB_PORT,
-})
+}
+
+const pool = new Pool(db_config)
 
 module.exports = {
   query: async (text, params) => {
