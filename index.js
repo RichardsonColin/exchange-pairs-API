@@ -8,8 +8,8 @@ const jobsToRun = requestJobs[API]['jobs']
 
 console.log('SERVICE STARTED...')
 
-// Runs schedule every 30 min
-schedule.scheduleJob('*/30 * * * *', (time) => {
+// Runs schedule every 29 min
+schedule.scheduleJob('*/29 * * * *', (time) => {
   console.log(`RUNNING... ${time}`)
   for(let reqJob in jobsToRun) {
     const jobFn = jobsToRun[reqJob]
@@ -17,16 +17,15 @@ schedule.scheduleJob('*/30 * * * *', (time) => {
   }
 })
 
-// // Run server
-// const PORT = process.env.SERVER_PORT || 3000
-// const HOST = 'localhost'
-// const requestListener = (req, res) => {
-//   res.writeHead(200)
-//   res.end("")
-// }
-
-// const server = http.createServer(requestListener)
-// server.listen(PORT, HOST, () => {
-//   console.log(`Server is running on http://${HOST}:${PORT}`)
-// })
+// Run server
+const PORT = process.env.PORT || 3000
+const HOST = 'localhost'
+const requestListener = (req, res) => {
+  res.writeHead(200)
+  res.end("")
+}
+const server = http.createServer(requestListener)
+server.listen(PORT, HOST, () => {
+  console.log(`Server is running on http://${HOST}:${PORT}`)
+})
 
