@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node-pg-migrate && node index.js",
+    "build": "npm install && node-pg-migrate && node index.js",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "node-pg-migrate"
