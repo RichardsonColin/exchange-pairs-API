@@ -4,87 +4,84 @@ exports.shorthands = undefined;
 
 exports.up = (pgm) => {
   pgm.dropTable('exchanges', { ifExists: true, cascade: true })
-  pgm.dropTable('cryptocurrencies', { ifExists: true, cascade: true })
-  pgm.dropTable('base_pairs', { ifExists: true, cascade: true })
-  pgm.dropTable('exchange_cryptocurrency_base_pair_references', { ifExists: true, cascade: true })
+  pgm.dropTable('assets', { ifExists: true, cascade: true })
+  pgm.dropTable('exchange_asset_pair_references', { ifExists: true, cascade: true })
   pgm.createTable('exchanges', {
     id: 'id',
+    api_id: { type: 'varchar(100)', notNull: true },
     name: { type: 'varchar(100)', notNull: true },
-    description: { type: 'varchar(10000)' },
-    "website_url": { type: 'varchar(1000)' },
-    "logo_url": { type: 'varchar(1000)' },
-    "country_origin": { type: 'varchar(100)' },
-    grade: { type: 'varchar(10)' },
-    "volume_24_hour": { type: 'decimal' },
-    "created_at": {
+    url: { type: 'varchar(1000)' },
+    image: { type: 'varchar(1000)' },
+    origin: { type: 'varchar(100)' },
+    grade: { type: 'varchar(100)' },
+    volume_24_hour: { type: 'float' },
+    created_at: {
       type: 'TIMESTAMPTZ',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
-    "updated_at": {
+    updated_at: {
       type: 'TIMESTAMPTZ',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
   })
-  pgm.createTable('cryptocurrencies', {
+  pgm.createTable('assets', {
     id: 'id',
+    api_id: { type: 'varchar(100)', notNull: true },
     symbol: { type: 'varchar(100)', notNull: true },
     name: { type: 'varchar(100)' },
-    "created_at": {
+    image: { type: 'varchar(1000)' },
+    created_at: {
       type: 'TIMESTAMPTZ',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
-    "updated_at": {
+    updated_at: {
       type: 'TIMESTAMPTZ',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
   })
-  pgm.createTable('base_pairs', {
+  pgm.createTable('exchange_asset_pair_references', {
     id: 'id',
-    symbol: { type: 'varchar(100)', notNull: true },
-    "created_at": {
-      type: 'TIMESTAMPTZ',
-      notNull: true,
-      default: pgm.func('current_timestamp'),
-    },
-    "updated_at": {
-      type: 'TIMESTAMPTZ',
-      notNull: true,
-      default: pgm.func('current_timestamp'),
-    },
-  })
-  pgm.createTable('exchange_cryptocurrency_base_pair_references', {
-    "exchange_id": {
+    exchange_id: {
       type: 'integer',
       notNull: true,
       references: '"exchanges"',
       onDelete: 'cascade',
     },
-    "cryptocurrency_id": {
+    asset_id: {
       type: 'integer',
       notNull: true,
-      references: '"cryptocurrencies"',
+      references: '"assets"',
     },
-    "base_pair_id": {
+    quote_id: {
       type: 'integer',
       notNull: true,
-      references: '"base_pairs"',
+      references: '"assets"',
     },
-    "created_at": {
+    is_stale: {
+      type: 'boolean',
+      default: false
+    },
+    quote_start: {
+      type: 'TIMESTAMPTZ',
+    },
+    created_at: {
       type: 'TIMESTAMPTZ',
       notNull: true,
       default: pgm.func('current_timestamp'),
     },
   })
-  pgm.createIndex('exchange_cryptocurrency_base_pair_references', 'exchange_id')
-  pgm.createIndex('exchange_cryptocurrency_base_pair_references', 'cryptocurrency_id')
-  pgm.createIndex('exchange_cryptocurrency_base_pair_references', 'base_pair_id')
-  pgm.addConstraint('exchanges', 'exchanges_name_AK01', { unique: 'name' })
-  pgm.addConstraint('cryptocurrencies', 'cryptocurrencies_symbol_AK01', { unique: 'symbol' })
-  pgm.addConstraint('base_pairs', 'base_pairs_symbol_AK01', { unique: 'symbol' })
+  pgm.createIndex('exchange_asset_pair_references', 'exchange_id')
+  pgm.createIndex('exchange_asset_pair_references', 'asset_id')
+  pgm.createIndex('exchange_asset_pair_references', 'quote_id')
+  pgm.addConstraint('exchanges', 'exchanges_api_id_PK01', { unique: 'api_id' })
+  pgm.addConstraint('exchanges', 'exchanges_name_PK02', { unique: 'name' })
+  pgm.addConstraint('assets', 'assets_api_id_PK01', { unique: 'api_id' })
+  pgm.addConstraint('assets', 'assets_symbol_PK02', { unique: 'symbol' })
+  pgm.addConstraint('exchange_asset_pair_references', 'exchange_asset_pair_references_ids_PK01', { unique: ['exchange_id', 'asset_id', 'quote_id'] })
 }
 
 exports.down = pgm => {}
