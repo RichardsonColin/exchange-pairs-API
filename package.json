@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm install && node-pg-migrate && node index.js",
+    "build": "npm install && echo \"postgres://nocxoqsitsfgck:5cd1fcb185a7b675fe3172e80eca92f83435dc14bcfa31990c1c4ba7fa3fff13@ec2-3-217-87-84.compute-1.amazonaws.com:5432/d892g9jfme38p6\" node-pg-migrate redo 1000 && node index.js",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "node-pg-migrate"
