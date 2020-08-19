@@ -6,12 +6,12 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "node-pg-migrate",
-    "migrate-rerun": "DATABASE_URL=postgres://colin:Lq3zuR9@localhost:5432/cryptopairsdb npm run migrate redo 1000"
+    "migrate": "node-pg-migrate"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bottleneck": "^2.19.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "node-pg-migrate": "^5.4.0",
