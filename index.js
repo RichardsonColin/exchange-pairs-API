@@ -1,15 +1,14 @@
 require('dotenv').config()
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
+
 const schedule = require('node-schedule')
 const requestJobs = require('./lib/request-jobs')
-
 const API = 'coinGecko'
 const jobsToRun = requestJobs[API]['jobs']
 
-console.log('SERVICE STARTED...')
-
 // Runs schedule every 29 min
+console.log('SERVICE STARTED...')
 schedule.scheduleJob('*/29 * * * *', (time) => {
   console.log(`RUNNING... ${time}`)
   for(let reqJob in jobsToRun) {
@@ -18,7 +17,11 @@ schedule.scheduleJob('*/29 * * * *', (time) => {
   }
 })
 
+// ---------------------------------------------------------------------
+
 // SERVER
+const PORT = process.env.PORT || 3000
+const HOST = 'localhost'
 
 // Root route
 app.get('/', function (req, res) {
