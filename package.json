@@ -1,5 +1,5 @@
 {
-  "name": "crypto_api_test",
+  "name": "crypto_ticker_api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
