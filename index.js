@@ -7,15 +7,15 @@ const requestJobs = require('./lib/request-jobs')
 const API = 'coinGecko'
 const jobsToRun = requestJobs[API]['jobs']
 
-// Runs schedule every 1 hour
+// Runs schedule every 59 min
 console.log('SERVICE STARTED...')
-// schedule.scheduleJob('* * */1 * * *', (time) => {
-//   console.log(`RUNNING... ${time}`)
-//   for(let reqJob in jobsToRun) {
-//     const jobFn = jobsToRun[reqJob]
-//     jobFn()
-//   }
-// })
+schedule.scheduleJob('*/59 * * * *', (time) => {
+  console.log(`RUNNING... ${time}`)
+  for(let reqJob in jobsToRun) {
+    const jobFn = jobsToRun[reqJob]
+    jobFn()
+  }
+})
 
 // ---------------------------------------------------------------------
 
