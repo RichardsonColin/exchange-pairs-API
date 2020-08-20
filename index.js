@@ -7,15 +7,15 @@ const requestJobs = require('./lib/request-jobs')
 const API = 'coinGecko'
 const jobsToRun = requestJobs[API]['jobs']
 
-// Runs schedule every 29 min
+// Runs schedule every 1 hour
 console.log('SERVICE STARTED...')
-schedule.scheduleJob('*/29 * * * *', (time) => {
+// schedule.scheduleJob('* */1 * * *', (time) => {
   console.log(`RUNNING... ${time}`)
   for(let reqJob in jobsToRun) {
     const jobFn = jobsToRun[reqJob]
     jobFn()
   }
-})
+// })
 
 // ---------------------------------------------------------------------
 
@@ -32,14 +32,3 @@ app.get('/', function (req, res) {
 app.listen(PORT, () => {
   console.log(`Server running on http://${HOST}:${PORT}`)
 })
-// const PORT = process.env.PORT || 3000
-// const HOST = 'localhost'
-// const requestListener = (req, res) => {
-//   res.writeHead(200)
-//   res.end("")
-// }
-// const server = http.createServer(requestListener)
-// server.listen(PORT, HOST, () => {
-//   console.log(`Server is running on http://${HOST}:${PORT}`)
-// })
-
