@@ -9,13 +9,13 @@ const jobsToRun = requestJobs[API]['jobs']
 
 // Runs schedule every 1 hour
 console.log('SERVICE STARTED...')
-schedule.scheduleJob('* * */1 * * *', (time) => {
-  console.log(`RUNNING... ${time}`)
-  for(let reqJob in jobsToRun) {
-    const jobFn = jobsToRun[reqJob]
-    jobFn()
-  }
-})
+// schedule.scheduleJob('* * */1 * * *', (time) => {
+//   console.log(`RUNNING... ${time}`)
+//   for(let reqJob in jobsToRun) {
+//     const jobFn = jobsToRun[reqJob]
+//     jobFn()
+//   }
+// })
 
 // ---------------------------------------------------------------------
 
