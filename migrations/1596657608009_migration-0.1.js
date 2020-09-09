@@ -51,22 +51,17 @@ exports.up = (pgm) => {
       references: '"exchanges"',
       onDelete: 'cascade',
     },
-    asset_id: {
-      type: 'integer',
+    asset_symbol: {
+      type: 'varchar(100)',
       notNull: true,
-      references: '"assets"',
     },
-    quote_id: {
-      type: 'integer',
+    quote_symbol: {
+      type: 'varchar(100)',
       notNull: true,
-      references: '"assets"',
     },
     is_stale: {
       type: 'boolean',
       default: false
-    },
-    quote_start: {
-      type: 'TIMESTAMPTZ',
     },
     created_at: {
       type: 'TIMESTAMPTZ',
@@ -75,13 +70,11 @@ exports.up = (pgm) => {
     },
   })
   pgm.createIndex('exchange_asset_pair_references', 'exchange_id')
-  pgm.createIndex('exchange_asset_pair_references', 'asset_id')
-  pgm.createIndex('exchange_asset_pair_references', 'quote_id')
   pgm.addConstraint('exchanges', 'exchanges_api_id_PK01', { unique: 'api_id' })
   pgm.addConstraint('exchanges', 'exchanges_name_PK02', { unique: 'name' })
   pgm.addConstraint('assets', 'assets_api_id_PK01', { unique: 'api_id' })
   pgm.addConstraint('assets', 'assets_symbol_PK02', { unique: 'symbol' })
-  pgm.addConstraint('exchange_asset_pair_references', 'exchange_asset_pair_references_ids_PK01', { unique: ['exchange_id', 'asset_id', 'quote_id'] })
+  pgm.addConstraint('exchange_asset_pair_references', 'exchange_asset_pair_references_ids_PK01', { unique: ['exchange_id', 'asset_symbol', 'quote_symbol'] })
 }
 
 exports.down = pgm => {}

@@ -12,19 +12,19 @@ const jobsToRun = requestJobs[API]['jobs']
 // JOBS
 
 // Runs schedule every hour at min 20
-cron.schedule('20 */3 * * *', () => {
-  let date = new Date().toJSON()
-  console.log(`I do the thing at: ${date}`)
-  for(let reqJob in jobsToRun) {
-    const jobFn = jobsToRun[reqJob]
-    jobFn()
-  }
-})
+// cron.schedule('20 */3 * * *', () => {
+  // let date = new Date().toJSON()
+  // console.log(`I do the thing at: ${date}`)
+  // for(let reqJob in jobsToRun) {
+  //   const jobFn = jobsToRun[reqJob]
+  //   jobFn()
+  // }
+// })
 
 // ---------------------------------------------------------------------
 // SERVER
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
 const HOST = 'localhost'
 
 // Root route
