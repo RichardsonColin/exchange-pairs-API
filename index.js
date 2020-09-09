@@ -13,12 +13,12 @@ const jobsToRun = requestJobs[API]['jobs']
 
 // Runs schedule every hour at min 20
 // cron.schedule('20 */3 * * *', () => {
-  // let date = new Date().toJSON()
-  // console.log(`I do the thing at: ${date}`)
-  // for(let reqJob in jobsToRun) {
-  //   const jobFn = jobsToRun[reqJob]
-  //   jobFn()
-  // }
+  let date = new Date().toJSON()
+  console.log(`I do the thing at: ${date}`)
+  for(let reqJob in jobsToRun) {
+    const jobFn = jobsToRun[reqJob]
+    jobFn()
+  }
 // })
 
 // ---------------------------------------------------------------------
