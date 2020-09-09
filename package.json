@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "DATABASE_URL=postgres://bpordknqehdiro:31fef8a76aa0cd39a3ca9b5684efd565dfc7e60a77375090ec4469efd5c21b47@ec2-54-236-146-234.compute-1.amazonaws.com:5432/d52tqk3bhq4a9k node-pg-migrate redo 1000",
-    "migrate-rerun": "DATABASE_URL=postgres://bpordknqehdiro:31fef8a76aa0cd39a3ca9b5684efd565dfc7e60a77375090ec4469efd5c21b47@ec2-54-236-146-234.compute-1.amazonaws.com:5432/d52tqk3bhq4a9k npm run migrate redo 1000"
+    "migrate": "node-pg-migrate",
+    "migrate-rerun": "DATABASE_URL=postgres://{DB_OWNER}:{DB_PASS}@localhost:5432/{DB_NAME} npm run migrate redo 1000"
   },
   "author": "",
   "license": "ISC",
