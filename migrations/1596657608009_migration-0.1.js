@@ -3,9 +3,6 @@
 exports.shorthands = undefined;
 
 exports.up = (pgm) => {
-  pgm.dropTable('exchanges', { ifExists: true, cascade: true })
-  pgm.dropTable('assets', { ifExists: true, cascade: true })
-  pgm.dropTable('exchange_asset_pair_references', { ifExists: true, cascade: true })
   pgm.createTable('exchanges', {
     id: 'id',
     api_id: { type: 'varchar(100)', notNull: true },
@@ -77,4 +74,8 @@ exports.up = (pgm) => {
   pgm.addConstraint('exchange_asset_pair_references', 'exchange_asset_pair_references_ids_PK01', { unique: ['exchange_id', 'asset_symbol', 'quote_symbol'] })
 }
 
-exports.down = pgm => {}
+exports.down = pgm => {
+  pgm.dropTable('exchanges', { ifExists: true, cascade: true })
+  pgm.dropTable('assets', { ifExists: true, cascade: true })
+  pgm.dropTable('exchange_asset_pair_references', { ifExists: true, cascade: true })
+}
