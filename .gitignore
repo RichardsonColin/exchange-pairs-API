@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+# db
+/bin
+/postgres-data
+
 # testing
 /coverage
 
