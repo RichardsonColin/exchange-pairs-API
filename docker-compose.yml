@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  api:
+    container_name: api
+    build:
+      context: ./
+      target: dev
+    depends_on:
+      - db
+    volumes:
+      - .:/src
+    command: npm run dev
+    ports:
+      - '${PORT}:${PORT}'
+    environment:
+      NODE_ENV: development
+      DEBUG: nodejs-docker-express:*
+
+  db:
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - '5432:${DB_PORT}'
+    volumes:
+      - pgdata:/data/postgres
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+
+volumes:
+  pgdata:
+    driver: local
