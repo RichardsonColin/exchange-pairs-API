@@ -1,6 +1,6 @@
-## Listomatic API
+## Listomatic Jobs
 
-This project is meant to expose curated cryptocurrency exchange data sourced from Coin Gecko. The Listomatic web app consumes this API data for the purpose of easily importing into Tradingview.
+This project is meant to aggregate curated cryptocurrency exchange data sourced from Coin Gecko. The Listomatic web app consumes this data for the purpose of easily importing into Tradingview.
 
 ## Create a Postgres DB
 
